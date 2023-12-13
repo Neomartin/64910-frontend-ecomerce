@@ -1,0 +1,23 @@
+.header {
+  display: flex;
+
+}
+
+.header a {
+  display: flex;
+  padding: .5rem 1rem;
+  background-color: dodgerblue;
+  color: white;
+  text-decoration: none;
+  align-items: center;
+  transition: .25s ease-in-out;
+  &:hover {
+    background-color: rgb(11, 95, 179);
+  }
+}
+
+.footer {
+  padding: 3rem 1rem;
+  color: white;
+  background-color: #222;
+}
