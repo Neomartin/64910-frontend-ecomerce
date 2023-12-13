@@ -1,31 +1,36 @@
 import './App.css'
-import { Routes } from 'react-router-dom' 
+
+import { Routes, Route, NavLink } from 'react-router-dom' 
+
+import Home from './pages/Home/Home'
+import Contact from './pages/Contact/Contact'
+import Register from './pages/Register/Register'
+import AboutUs from './pages/AboutUs/AboutUs'
+import Login from './pages/Login/Login'
+
 
 function App() {
 
   return (
     <>
       <header className='header'>
-        <a href="#">Principal</a>
-        <a href="#">Contacto</a>
-        <a href="#">Acerca de</a>
-        <a href="#">Registro</a>
-        <a href="#">Admin Product</a>
-        <a href="#">Admin user</a>
+        <NavLink to="/" className="nav-link">Principal</NavLink>
+        <NavLink to="/contact" className="nav-link">Contacto</NavLink>
+        <NavLink to="/about-us" className="nav-link">Acerca de</NavLink>
+        <NavLink to="/register" className="nav-link">Registro</NavLink>
+        <NavLink to="/admin-product" className="nav-link">Admin Product</NavLink>
+        <NavLink to="/admin-user" className="nav-link">Admin user</NavLink>
       </header>
 
 
       <main className="main">
         <Routes>
-          
-
+          <Route path='/' element={ <Home /> }   />
+          <Route path='/contact' element={ <Contact /> } />
+          <Route path='/about-us' element={ <AboutUs /> } />
+          <Route path='/login' element={ <Login /> } />
+          <Route path='/register' element={ <Register /> } />
         </Routes>
-        <h1>HOME</h1>
-        <h1>Contacto</h1>
-        <h1>Registro</h1>
-        <h1>Acerca de</h1>
-        <h1>Admin Product</h1>
-        <h1>Admin User</h1>
 
            
       </main>
