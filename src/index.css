@@ -17,3 +17,42 @@
 .main {
   flex: 1;
 }
+
+.swal2-confirm {
+  background-color: royalblue !important;
+}
+
+.main-container {
+  width: 100%;
+  max-width: 1200px;
+  background-color: lightblue;
+  margin: 0 auto;
+}
+.admin-dashboard {
+  display: flex;
+  flex-direction: column;
+}
+.admin-dashboard > * {
+  padding: 1rem;
+
+}
+.form-container {
+  width: 100%;
+  max-width: 450px;
+  background-color: bisque;
+}
+.table-container {
+  flex: 1 0 0;
+}
+/* admin-dashboard">
+        <div className="form-container"></div>
+        <div className="table-container */
+
+@media screen and (width > 768px) {
+  .admin-dashboard {
+    flex-direction: row;
+  }
+  .form-container {
+    width: 40%;
+  }
+}

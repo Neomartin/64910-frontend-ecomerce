@@ -4,7 +4,7 @@ import './Header.css'
 
 export default function Header() {
 
-    const isAdmin = false;
+    const isAdmin = true;
 
     // const avaibleLinks = LINKS.filter(link => isAdmin || !link.admin)
 
@@ -14,6 +14,12 @@ export default function Header() {
             <NavLink to="/contact" className="nav-link">Contacto</NavLink>
             <NavLink to="/about-us" className="nav-link">Acerca de</NavLink>
             <NavLink to="/register" className="nav-link">Registro</NavLink>
+
+
+            <NavLink to="/login" className="nav-link">Login</NavLink>
+
+            
+            	
             { isAdmin && (
                     <>
                         <NavLink to="/admin-product" className="nav-link">Admin Product</NavLink>

@@ -24,13 +24,18 @@ function App() {
           <Route path='/' element={ <Home /> }   />
           <Route path='/contact' element={ <Contact /> } />
           <Route path='/about-us' element={ <AboutUs /> } />
+
           <Route path='/login' element={ <Login /> } />
+
+          
           <Route path='/register' element={ <Register /> } />
 
           {/* Rutas protegidas con el Guard AdminRoute */}
           <Route  path='/admin-product' 
                   element={ <AdminRoute>
+
                                 <AdminProduct />
+                                
                             </AdminRoute>       
                           } 
           />
