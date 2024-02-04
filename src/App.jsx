@@ -1,5 +1,5 @@
 import './App.css'
-
+import React from "react"
 import { Routes, Route } from 'react-router-dom' 
 
 import Home from './pages/Home/Home'
@@ -7,10 +7,10 @@ import Contact from './pages/Contact/Contact'
 import Register from './pages/Register/Register'
 import AboutUs from './pages/AboutUs/AboutUs'
 import Login from './pages/Login/Login'
-import Header from './Layout/Header/Header'
-import Footer from './Layout/Footer/Footer'
+import Header from './layout/Header/Header'
+import Footer from './layout/Footer/Footer'
 import AdminProduct from './pages/AdminProduct/AdminProduct'
-import AdminRoute from './Guard/AdminRoute/AdminRoute'
+import AdminRoute from './guard/AdminRoute/AdminRoute'
 import AdminUser from './pages/AdminUser/AdminUser'
 
 function App() {

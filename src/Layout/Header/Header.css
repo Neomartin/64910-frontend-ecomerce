@@ -1,7 +1,9 @@
 .header {
     display: flex;
     width: 100%;
-    background-color: dodgerblue;
+    background-color: rgb(15, 102, 188);
+    position: sticky;
+    top: 0;
 }
 
 .header .nav-link {
@@ -17,7 +19,8 @@
         background-color: rgb(11, 95, 179);
     }
 }
+
 .nav-link.active {
     background-color: rgb(41, 41, 41);
-    
+
 }

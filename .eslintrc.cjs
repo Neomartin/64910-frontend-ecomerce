@@ -1,29 +1,33 @@
 module.exports = {
   env: {
     browser: true,
-    es2021: true,
+    es2021: true
   },
   extends: [
-    'airbnb',
+    'standard',
+    'plugin:react/recommended',
     'eslint-config-prettier',
+    'plugin:react/jsx-runtime'
   ],
   overrides: [{
     env: {
-      node: true,
+      node: true
     },
     files: [
-      '.eslintrc.{js,cjs}',
+      '.eslintrc.{js,cjs}'
     ],
     parserOptions: {
-      sourceType: 'script',
-    },
-  }, ],
+      sourceType: 'script'
+    }
+  }],
   parserOptions: {
     ecmaVersion: 'latest',
-    sourceType: 'module',
+    sourceType: 'module'
   },
+  plugins: [
+    'react'
+  ],
   rules: {
-    'linebreak-style': 'off',
-    "react/jsx-props-no-spreading": "off",
-  },
-};
+    'react/prop-types': 'off'
+  }
+}
