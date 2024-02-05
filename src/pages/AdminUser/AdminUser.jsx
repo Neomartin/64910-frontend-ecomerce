@@ -105,18 +105,47 @@ const AdminUser = () => {
 	const { register, handleSubmit, setValue } = useForm();
 
 	// Obtener data del formulario y hacer un POST o un PUT
-	async function submitedData(data) {
-		console.log(data);
+	async function handleSubmitTo(e) {
+		// e.preventDefault();
+
+		const formData = new FormData(); // Create a FormData object
+
+		for (const [key, value] of Object.entries(e)) {
+			console.log(key);
+			if (key === "image") {
+				formData.append(key, value[0]);
+				break;
+			}
+			formData.append(key, value);
+		}
+
+		console.log("No continua");
+		// Append all form values to the FormData object
+		// formData.append("name", e.target.name.value);
+		// formData.append("email", e.target.email.value);
+		// formData.append("password", e.target.password.value);
+		// formData.append("age", e.target.age.value);
+		// formData.append("location", e.target.location.value);
+
+		// if (e.target.image.files[0]) {
+		// 	formData.append("image", e.target.image.files[0]);
+		// }
+		for (const [key, value] of formData) {
+			console.log(key, value);
+		}
+
 		try {
 			/* Vamos a definir si tenemos que hacer un 
 					POST: añadir usuario
 					PUT: vamos a editar un usuario
 			*/
 
+			// data.image = data.image[0];
+
 			if (userId) {
 				if (!TOKEN) return;
 				// ME FALTA AÑADIR EL
-				const response = await axios.put(`${URL}/users/${userId}`, data, {
+				const response = await axios.put(`${URL}/users/${userId}`, formData, {
 					headers: {
 						authorization: TOKEN,
 					},
@@ -133,7 +162,7 @@ const AdminUser = () => {
 				return;
 			}
 
-			const response = await axios.post(`${URL}/users`, data);
+			const response = await axios.post(`${URL}/users`, formData);
 			console.log(response.data);
 			Swal.fire({
 				title: "Usuario Creado",
@@ -160,7 +189,7 @@ const AdminUser = () => {
 		setValue("email", user?.email || "");
 
 		setValue("age", user?.age || "");
-		setValue("image", user?.image || "");
+		setValue("image", user?.category._id || "");
 	}
 
 	return (
@@ -177,14 +206,22 @@ const AdminUser = () => {
 						)}
 					</h2>
 
-					<form className="admin-form" onSubmit={handleSubmit(submitedData)}>
+					<form
+						className="admin-form"
+						onSubmit={handleSubmit(handleSubmitTo)}
+						encType="multipart/form-data"
+					>
 						<div className="input-group">
 							<label htmlFor="product">Nombre Completo</label>
 							<input
 								type="text"
 								id="product"
 								className="admin-input"
-								{...register("name")}
+								{...register("name", {
+									required: true,
+									minlength: 3,
+									maxlength: 100,
+								})}
 							/>
 						</div>
 						<div className="input-group">
@@ -192,7 +229,7 @@ const AdminUser = () => {
 							<input
 								type="email"
 								className="admin-input"
-								{...register("email")}
+								{...register("email", { required: true })}
 							/>
 						</div>
 						<div className="input-group">
@@ -201,7 +238,7 @@ const AdminUser = () => {
 								type="password"
 								className="admin-input"
 								disabled={userId}
-								{...register("password")}
+								{...register("password", { required: true })}
 							/>
 						</div>
 						<div className="input-group">
@@ -211,7 +248,7 @@ const AdminUser = () => {
 						<div className="input-group">
 							<label htmlFor="">Imagen</label>
 							<input
-								type="url"
+								type="file"
 								className="admin-input"
 								{...register("image")}
 							/>

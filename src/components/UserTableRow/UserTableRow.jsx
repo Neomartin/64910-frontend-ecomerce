@@ -1,10 +1,12 @@
 import defaultPicture from "../../assets/images/default-profile-picture.png";
+const URL = import.meta.env.VITE_SERVER_URL;
+
 export const UserTableRow = ({ usr, deleteUser, setFormValue }) => {
 	return (
 		<tr key={usr._id}>
 			<td className="table-img">
 				<img
-					src={usr.image ? usr.image : defaultPicture}
+					src={usr.image ? `${URL}/images/users/${usr.image}` : defaultPicture}
 					alt={`${usr.name} profile picture`}
 				/>
 			</td>
