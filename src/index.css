@@ -50,6 +50,7 @@
 
 .table-container {
   flex: 1 0 0;
+  overflow-x: scroll;
 }
 
 .input-group {
@@ -161,6 +162,26 @@
   align-items: center;
 }
 
+.flex-between {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.pagination-container {
+  width: 100%;
+  margin: 2rem auto 0;
+
+  button {
+    padding: 0.5rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: royalblue;
+    color: white;
+    cursor: pointer;
+  }
+}
+
 /* admin-dashboard">
         <div className="form-container"></div>
         <div className="table-container */
@@ -168,9 +189,11 @@
 @media screen and (width > 768px) {
   .admin-dashboard {
     flex-direction: row;
+    flex: 1;
   }
 
   .form-container {
-    width: 40%;
+    width: 250px;
+    max-width: 250px;
   }
 }

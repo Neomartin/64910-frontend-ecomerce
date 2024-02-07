@@ -15,15 +15,32 @@ const AdminUser = () => {
 	const [categories, setCategories] = useState([]);
 	// const [isFormEdit, setIsFormEdit] = useState(false);
 	const [userId, setUserId] = useState();
+	const [totalButtons, setTotalButtons] = useState([]);
+	const [limit, setLimit] = useState(2);
 	const navigate = useNavigate();
 
 	// -Obtener usuarios
-	async function getUsers() {
+	async function getUsers(page = 0) {
 		try {
-			const response = await axios.get(`${URL}/users`);
+			const response = await axios.get(
+				`${URL}/users?page=${page}&limit=${limit}`,
+			);
 			const users = response.data.users;
-			console.log(`Bucle`);
+			const total = response.data.total;
+
+			const buttonsQuantity = Math.ceil(total / limit);
+
+			const arrayButtons = [];
+
+			for (let i = 0; i < buttonsQuantity; i++) {
+				arrayButtons.push(i);
+			}
+
+			setTotalButtons(arrayButtons);
+
 			setDbUsers(users);
+
+			console.log(response.data);
 		} catch (error) {
 			console.log(error);
 			Swal.fire({
@@ -32,6 +49,7 @@ const AdminUser = () => {
 			});
 		}
 	}
+
 
 	async function deleteUser(id) {
 		Swal.fire({
@@ -64,7 +82,7 @@ const AdminUser = () => {
 					// Actualizar el estado de mi dbUsers para que se vuelva a pintar sin el user borrado
 					getUsers();
 				} catch (error) {
-					console.log(error.response.status);
+					console.log(error);
 					Swal.fire("Error al borrar", "No se pudo borrar el usuario", "error");
 					if (error.response.status === 401) return logout();
 				}
@@ -87,7 +105,7 @@ const AdminUser = () => {
 			getUsers();
 			getCategories();
 		}, //	Funcion que se ejecuta cuando se monta el componente
-		[],
+		[limit],
 	);
 
 	async function getCategories() {
@@ -163,6 +181,27 @@ const AdminUser = () => {
 		setValue("image", user?.image || "");
 	}
 
+	async function handleSearch(e) {
+		// Hacer una peticion a mi servidor para buscar usuarios
+		try {
+			const search = e.target.value;
+
+			if(!search) getUsers();
+
+			if (search.length <= 3) return;
+
+			const response = await axios.get(`${URL}/users/search/${search}`);
+
+			const users = response.data.users;
+
+			setDbUsers(users);
+
+		} catch (error) {
+			console.log(error)
+			// Mensaje para el usuario de que no se pudo buscar o algo
+		}
+	}
+
 	return (
 		<div className="admin-dashboard">
 			<div className="form-container">
@@ -211,7 +250,8 @@ const AdminUser = () => {
 						<div className="input-group">
 							<label htmlFor="">Imagen</label>
 							<input
-								type="url"
+								type="file"
+								accept="image/*"
 								className="admin-input"
 								{...register("image")}
 							/>
@@ -239,12 +279,38 @@ const AdminUser = () => {
 
 			<div className="table-container">
 				{/* Tabla con mis productos para manejar el CRUD de los mismos */}
-				<h2>Tabla de productos</h2>
+				<div className="flex-between">
+					<h2>Tabla de productos</h2>
+					<div className="input-group">
+					<label htmlFor="search">Buscar producto</label>
+						<input type="text" id="search" onKeyUp={handleSearch} />
+					</div>
+				</div>
 				<UserTable
 					users={dbUsers}
 					deleteUser={deleteUser}
 					setFormValue={setFormValue}
 				/>
+				<div className="pagination-container">
+					{totalButtons.map((btn) => (
+						<button key={btn} onClick={() => getUsers(btn)}>
+							{btn + 1}
+						</button>
+					))}
+
+					{/* {Array.from({ length: Math.ceil(total / limit) }).map((_, idx) => (
+						<button key={idx} onClick={() => getUsers(idx)}>
+							{idx + 1}
+						</button>
+					))} */}
+				</div>
+				<div>
+					<select onChange={(e) => setLimit(e.target.value)}>
+						<option value={2}>2</option>
+						<option value={5}>5</option>
+						<option value={10}>10</option>
+					</select>
+				</div>
 			</div>
 		</div>
 	);

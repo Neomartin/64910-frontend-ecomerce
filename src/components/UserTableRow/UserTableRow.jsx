@@ -8,7 +8,7 @@ export const UserTableRow = ({ usr, deleteUser, setFormValue }) => {
 					alt={`${usr.name} profile picture`}
 				/>
 			</td>
-			<td className="table-name">{usr.name}</td>
+			<td className="table-name">{usr.name.toUpperCase()}</td>
 			<td className="table-email">{usr.email}</td>
 			<td className="table-location">
 				{usr.location ? usr.location : <span className="no-data">NO DATA</span>}
