@@ -40,16 +40,14 @@
 .form-container {
   width: 100%;
   max-width: 450px;
-  background-color: bisque;
+  background-color: #333;
+  color: white;
 }
 
-.form-sticky {
-  position: sticky;
-  top: 50px;
-}
+
 
 .table-container {
-  flex: 1 0 0;
+  flex: 1 0 500px;
   overflow-x: scroll;
 }
 
@@ -93,7 +91,9 @@
 .table-admin {
   border-collapse: collapse;
   width: 100%;
-
+  tr {
+    height: 72px;
+  }
 }
 
 .table-admin thead {
@@ -108,11 +108,15 @@
   text-align: left;
 }
 
-.table-img img {
-  width: 50px;
-  height: 50px;
-  border-radius: 50%;
-  object-fit: cover;
+.table-img {
+  text-align: center;
+  img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    object-fit: cover;
+    display: inline-block;
+  }
 }
 
 .table-name {
@@ -182,6 +186,7 @@
   }
 }
 
+
 /* admin-dashboard">
         <div className="form-container"></div>
         <div className="table-container */
@@ -190,6 +195,10 @@
   .admin-dashboard {
     flex-direction: row;
     flex: 1;
+  }
+  .form-sticky {
+    position: sticky;
+    top: 50px;
   }
 
   .form-container {

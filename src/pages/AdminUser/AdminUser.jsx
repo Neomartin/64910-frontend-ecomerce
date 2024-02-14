@@ -124,8 +124,27 @@ const AdminUser = () => {
 
 	// Obtener data del formulario y hacer un POST o un PUT
 	async function submitedData(data) {
-		console.log(data);
 		try {
+			console.log(data);
+
+			const formData = new FormData();
+
+			formData.append("name", data.name);
+			formData.append("email", data.email);
+			formData.append("password", data.password);
+			formData.append("age", data.age);
+			formData.append("location", data.location);
+			// Imagen tengo que hacer algo diferente
+			formData.append("image", data.image[0])
+
+			// for(const key of Object.keys(data)) {
+			// 	if(key === 'image') {
+			// 		formData.append(key, data.image[0])
+			// 		continue;
+			// 	}
+			// 	formData.append(key, data[key])
+			// }
+
 			/* Vamos a definir si tenemos que hacer un 
 					POST: añadir usuario
 					PUT: vamos a editar un usuario
@@ -134,7 +153,7 @@ const AdminUser = () => {
 			if (userId) {
 				if (!TOKEN) return;
 				// ME FALTA AÑADIR EL
-				const response = await axios.put(`${URL}/users/${userId}`, data, {
+				const response = await axios.put(`${URL}/users/${userId}`, formData, {
 					headers: {
 						authorization: TOKEN,
 					},
@@ -151,11 +170,11 @@ const AdminUser = () => {
 				return;
 			}
 
-			const response = await axios.post(`${URL}/users`, data);
+			const response = await axios.post(`${URL}/users`, formData);
 			console.log(response.data);
 			Swal.fire({
 				title: "Usuario Creado",
-				text: `El usuario ${response.data.user.name} fue creado correctamente`,
+				text: `El usuario ${response.data.user?.name} fue creado correctamente`,
 				icon: "success",
 			});
 			getUsers();
@@ -216,7 +235,8 @@ const AdminUser = () => {
 						)}
 					</h2>
 
-					<form className="admin-form" onSubmit={handleSubmit(submitedData)}>
+					<form className="admin-form" onSubmit={handleSubmit(submitedData)} 
+							encType="multipart/form-data">
 						<div className="input-group">
 							<label htmlFor="product">Nombre Completo</label>
 							<input
