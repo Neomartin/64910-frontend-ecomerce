@@ -1,26 +1,64 @@
 .header {
     display: flex;
     width: 100%;
-    background-color: rgb(15, 102, 188);
+    background-color: rgb(38, 133, 227);
     position: sticky;
     top: 0;
+    justify-content: space-between;
+    box-shadow: 0 2px 4px #3e3e3e69;
+    z-index: 2;
 }
-
+.header nav {
+    display: flex;
+    font-size: .875rem;
+}
 .header .nav-link {
     display: flex;
     padding: .5rem 1rem;
-    color: white;
+    color: rgb(223, 223, 223);
     text-decoration: none;
     align-items: center;
     transition: .25s ease-in-out;
-
+    border: none;
+    outline: none;
+    background-color: transparent;
 
     &:hover {
-        background-color: rgb(11, 95, 179);
+        background-color: rgb(22, 78, 134);
     }
 }
 
 .nav-link.active {
-    background-color: rgb(41, 41, 41);
+    background-color: rgb(42, 115, 188);
 
+}
+
+.cart {
+    font-size: 1.25rem;
+}
+
+.user-info {
+    display: flex;
+    color: white;
+    align-items: center;
+    gap: .75rem;
+    padding-right: .5rem;
+
+    i {
+        cursor: pointer;
+        transition: all .3s ease-in-out;
+        &:hover {
+            color: #333;
+        }
+    }
+}
+.user-avatar {
+    display: flex;
+    align-items: center;
+    padding: .25rem;
+    img {
+        width: 36px;
+        height: 36px;
+        border-radius: 50%;
+    }
 }

@@ -1,0 +1,11 @@
+.table-utils {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 1.5rem;
+
+    select {
+        padding: 0.5rem;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+    }
+}

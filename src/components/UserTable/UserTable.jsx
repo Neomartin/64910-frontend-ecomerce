@@ -1,7 +1,10 @@
 import { UserTableRow } from "../UserTableRow/UserTableRow";
+import { useUser } from "@/context/UserContext";
 
-export const UserTable = ({ users, deleteUser, setFormValue }) => {
-	// console.log(props);
+export const UserTable = ({ users, deleteUser, fnSetFormValue }) => {
+	const { user } = useUser();
+
+	console.log(user)
 
 	return (
 		<div className="table-container">
@@ -22,7 +25,7 @@ export const UserTable = ({ users, deleteUser, setFormValue }) => {
 							key={usr._id}
 							usr={usr}
 							deleteUser={deleteUser}
-							setFormValue={setFormValue}
+							fnSetFormValue={fnSetFormValue}
 						/>
 					))}
 				</tbody>
