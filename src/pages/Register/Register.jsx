@@ -1,3 +1,10 @@
+import RegisterForm from "@/components/RegisterForm/RegisterForm";
+import './Register.css';
+
 export default function Register() {
-	return <div>Register</div>;
+	return <>
+				<div className="register-container">
+					<RegisterForm />
+				</div>
+			</>;
 }

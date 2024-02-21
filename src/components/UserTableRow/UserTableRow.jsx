@@ -1,10 +1,15 @@
 import defaultPicture from "../../assets/images/default-profile-picture.png";
-export const UserTableRow = ({ usr, deleteUser, setFormValue }) => {
+const URL = import.meta.env.VITE_SERVER_URL;
+
+export const UserTableRow = ({ usr, deleteUser, fnSetFormValue }) => {
+
+	
+
 	return (
 		<tr key={usr._id}>
 			<td className="table-img">
 				<img
-					src={usr.image ? usr.image : defaultPicture}
+					src={usr.image ? `${URL}/images/users/${usr.image}` : defaultPicture}
 					alt={`${usr.name} profile picture`}
 				/>
 			</td>
@@ -22,7 +27,7 @@ export const UserTableRow = ({ usr, deleteUser, setFormValue }) => {
 					>
 						<i className="fa-solid fa-trash"></i>
 					</button>
-					<button className="btn btn-edit" onClick={() => setFormValue(usr)}>
+					<button className="btn btn-edit" onClick={() => fnSetFormValue(usr)}>
 						<i className="fa-solid fa-pencil"></i>
 					</button>
 				</div>

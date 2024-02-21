@@ -1,10 +1,14 @@
 .header {
     display: flex;
     width: 100%;
-    background-color: rgb(15, 102, 188);
+    background-color: rgb(38, 133, 227);
     position: sticky;
     top: 0;
     z-index: 2;
+}
+
+.nav-list {
+    display: flex;
 }
 
 .header .nav-link,
@@ -21,12 +25,12 @@
     font-size: .875rem;
 
     &:hover {
-        background-color: rgb(11, 95, 179);
+        background-color: rgb(22, 78, 134);
     }
 }
 
 .nav-link.active {
-    background-color: rgb(41, 41, 41);
+    background-color: rgb(42, 115, 188);
 
 }
 
@@ -36,6 +40,17 @@
     margin-left: auto;
     color: white;
     padding-inline: 1rem;
+
+    .user-avatar {
+        padding: .25rem;
+
+        img {
+            width: 36px;
+            height: 36px;
+            object-fit: cover;
+            border-radius: 50%;
+        }
+    }
 
     * {
         display: flex;
