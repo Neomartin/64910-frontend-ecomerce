@@ -1,10 +1,15 @@
 import { NavLink, useNavigate } from "react-router-dom";
 import "./Header.css";
+import { useOrder } from "@/context/OrderContext";
 // import LINKS from '../../LINKS';
 
 export default function Header() {
+	const { toggleMenu, totalItems } = useOrder();
 	const navigate = useNavigate();
 	const isAdmin = true;
+	const user = {
+		name: "John Doe",
+	};
 	const currentUser = JSON.parse(localStorage.getItem("currentUser"));
 
 	// const avaibleLinks = LINKS.filter(link => isAdmin || !link.admin)
@@ -55,6 +60,20 @@ export default function Header() {
 				</>
 			)}
 
+			<div className="user-info">
+				{user && (
+					<>
+						<div>{user.name}</div>
+						<div className="icon-container">
+							<i
+								data-count={totalItems}
+								className="cart-icon fa-solid fa-cart-shopping"
+								onClick={() => toggleMenu()}
+							></i>
+						</div>
+					</>
+				)}
+			</div>
 			{/* {
                 avaibleLinks.map(link => (
                     <NavLink key={link.path} className="nav-link" to={link.path} >{link.text}</NavLink>

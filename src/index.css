@@ -91,6 +91,7 @@
 .table-admin {
   border-collapse: collapse;
   width: 100%;
+
   tr {
     height: 72px;
   }
@@ -110,6 +111,7 @@
 
 .table-img {
   text-align: center;
+
   img {
     width: 50px;
     height: 50px;
@@ -142,8 +144,9 @@
 }
 
 .btn {
-  padding: .25rem 0.125rem;
-  width: 1.25rem;
+  padding: .5rem .75rem;
+  margin: 1rem;
+
   border: none;
   border-radius: 3px;
   background-color: royalblue;
@@ -177,6 +180,7 @@
   margin: 2rem auto 0;
 
   button {
+    width: 1.25rem;
     padding: 0.5rem;
     border: 1px solid #ccc;
     border-radius: 5px;
@@ -185,6 +189,16 @@
     cursor: pointer;
   }
 }
+
+/* #================= UTILS =================  */
+.ml-auto {
+  margin-left: auto;
+}
+
+.pointer {
+  cursor: pointer;
+}
+
 
 
 /* admin-dashboard">
@@ -196,6 +210,7 @@
     flex-direction: row;
     flex: 1;
   }
+
   .form-sticky {
     position: sticky;
     top: 50px;

@@ -12,13 +12,14 @@ import Footer from './layout/Footer/Footer'
 import AdminProduct from './pages/AdminProduct/AdminProduct'
 import AdminRoute from './guard/AdminRoute/AdminRoute'
 import AdminUser from './pages/AdminUser/AdminUser'
+import { Cart } from './layout/Cart/Cart'
 
 function App() {
 
   return (
     <>
       <Header />
-
+      <Cart />
       <main className="main">
         <Routes>
           <Route path='/' element={ <Home /> }   />

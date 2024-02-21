@@ -1,45 +1,46 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { ProductCard } from "../ProductCard/ProductCard";
+import './ProductCardsContainer.css';
+
+const URL = import.meta.env.VITE_SERVER_URL;
 
 export const ProductCardsContainer = () => {
-	const [users, setUsers] = useState([]);
-	console.log(users);
-	const [addUser, setAddUser] = useState(false);
+	const [ products, setProducts ] = useState([]);
 
-	useEffect(
-		function () {
-			//  Codigo que se ejecuta cuando se monta el componente
-			console.log("Se monto el componente");
-			getUsers();
-		},
-		[addUser],
-	);
+	useEffect(() => {
+		getProducts()
+	}, [])
 
-	async function getUsers() {
+	async function getProducts() {
 		try {
-			//  Pedido al backend de los usuarios para luego pintarlos
-			const response = await axios.get("http://localhost:3000/users");
+			
+			const response = await axios.get(`${URL}/users`);
 
-			setUsers(response.data.users);
+			const productsDB = response.data.users;
 
-			console.log(response);
+			setProducts(productsDB);
+
 		} catch (error) {
-			console.log(error);
+			console.log(error)
 		}
 	}
 
 	return (
-		<>
-			<h1>Lista de Productos</h1>
-			<div className="product-container">
-				{users.map((user) => {
+		<div className="product-container">
+
+			{
+				products.map((product) => {
+
 					return (
-						//Llamar al componente ProductCard
-						<ProductCard user={user} key={user._id} />
-					);
-				})}
-			</div>
-		</>
-	);
+
+						<ProductCard key={product._id} product={product} />
+
+					)
+
+				})
+			}
+
+		</div>
+	)
 };

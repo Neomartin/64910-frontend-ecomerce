@@ -1,0 +1,113 @@
+.cart-wrapper {
+    width: 0;
+    overflow: hidden;
+    background-color: white;
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 1;
+    transition: width .25s ease-in-out;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    &.active {
+        width: 400px;
+    }
+
+    .list-container {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        padding: 1rem;
+        /* - SHOW */
+        padding-top: 3rem;
+
+        h2 {
+            color: #666;
+            font-size: 1.25rem;
+            text-transform: uppercase;
+        }
+
+        .order-list {
+            list-style: none;
+            margin: 0;
+
+            .order-item {
+                display: flex;
+                align-items: center;
+                font-size: .75rem;
+                padding: .25rem;
+
+                .order-image {
+
+                    width: 36px;
+                    height: 36px;
+                    object-fit: cover;
+                    border-radius: 50%;
+                    margin-right: .75rem;
+                }
+
+                .order-quantity {
+                    margin-left: auto;
+                    display: flex;
+                    gap: .75rem;
+                    align-items: center;
+                    font-weight: bold;
+                    font-size: 1rem;
+
+                    .order-delete-item {
+                        cursor: pointer;
+                        background-color: red;
+                        color: white;
+                        border: none;
+                        font-size: .75rem;
+                        display: flex;
+                        align-items: center;
+                        padding: .5rem .375rem;
+                        border-radius: 3px;
+                    }
+                }
+
+
+                &:not(:last-child) {
+                    border-bottom: 1px solid #dedede9e;
+                }
+            }
+
+        }
+
+
+    }
+
+    .order-finish {
+        .order-purchase {
+            display: flex;
+            justify-content: end;
+
+            button {
+                margin-top: 0;
+            }
+        }
+    }
+
+    .total {
+        display: flex;
+        justify-content: space-between;
+        padding: 1rem;
+        border-top: 1px solid #c8e2ff;
+        font-weight: bold;
+
+        .total-count {
+            color: #555;
+            font-size: .875rem;
+        }
+
+        .total-price {
+            span {
+                font-size: 1.5rem;
+            }
+        }
+    }
+}

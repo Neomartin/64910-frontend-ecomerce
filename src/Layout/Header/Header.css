@@ -4,16 +4,21 @@
     background-color: rgb(15, 102, 188);
     position: sticky;
     top: 0;
+    z-index: 2;
 }
 
-.header .nav-link {
+.header .nav-link,
+.header button {
     display: flex;
-    padding: .5rem 1rem;
+    padding: .75rem 1rem;
     color: white;
     text-decoration: none;
     align-items: center;
     transition: .25s ease-in-out;
-
+    background-color: inherit;
+    outline: none;
+    border: none;
+    font-size: .875rem;
 
     &:hover {
         background-color: rgb(11, 95, 179);
@@ -23,4 +28,47 @@
 .nav-link.active {
     background-color: rgb(41, 41, 41);
 
+}
+
+.user-info {
+    display: flex;
+    gap: .5rem;
+    margin-left: auto;
+    color: white;
+    padding-inline: 1rem;
+
+    * {
+        display: flex;
+        align-items: center;
+    }
+
+    .icon-container {
+        font-size: 1.25rem;
+        display: flex;
+        align-items: center;
+
+
+        .cart-icon {
+            cursor: pointer;
+            position: relative;
+
+            &::after {
+                content: attr(data-count);
+                display: block;
+                position: absolute;
+                font-size: .5rem;
+                width: 16px;
+                height: 16px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                top: -10px;
+                right: -6px;
+                background-color: red;
+                color: white;
+                border-radius: 50%;
+
+            }
+        }
+    }
 }
