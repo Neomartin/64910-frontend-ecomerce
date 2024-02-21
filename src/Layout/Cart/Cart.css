@@ -84,10 +84,17 @@
     .order-finish {
         .order-purchase {
             display: flex;
-            justify-content: end;
+            justify-content: space-between;
+            padding: 1rem;
+            align-items: flex-end;
+
+            a {
+                font-size: .75rem;
+                color: orange;
+            }
 
             button {
-                margin-top: 0;
+                margin: 0;
             }
         }
     }

@@ -1,6 +1,7 @@
 import { useOrder } from "@/context/OrderContext";
 import productDefault from "../../assets/images/default-product.png";
 import "./ProductCard.css";
+import { Link } from "react-router-dom";
 
 const URL = import.meta.env.VITE_SERVER_URL;
 
@@ -27,7 +28,9 @@ export const ProductCard = ({ product }) => {
 				<p className="product-date">{product.email}</p>
 			</div>
 			<div className="card-footer">
-				<button className="btn transparent">Ver mas</button>
+				<Link className="btn transparent" to={`/product-detail/${product._id}`}>
+					Ver mas
+				</Link>
 				<button className="btn" onClick={() => addItem(product)}>
 					Comprar
 				</button>

@@ -3,7 +3,8 @@ import { useOrder } from "../../context/OrderContext";
 
 const URL = import.meta.env.VITE_SERVER_URL;
 export const Cart = () => {
-	const { order, cartMenu, total, totalItems } = useOrder();
+	const { order, cartMenu, total, totalItems, finishOrder, clearCart } =
+		useOrder();
 	console.log(`Order`, order);
 	return (
 		<div className={`cart-wrapper ${cartMenu ? "active" : ""}`}>
@@ -39,7 +40,10 @@ export const Cart = () => {
 					</div>
 				</div>
 				<div className="order-purchase">
-					<button className="btn">Comprar</button>
+					<a onClick={() => clearCart()}>Limpiar carrito</a>
+					<button className="btn" onClick={() => finishOrder()}>
+						Comprar
+					</button>
 				</div>
 			</div>
 		</div>

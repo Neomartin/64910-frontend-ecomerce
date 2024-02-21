@@ -12,6 +12,7 @@ import AdminProduct from "./pages/AdminProduct/AdminProduct";
 import AdminRoute from "./guard/AdminRoute/AdminRoute";
 import AdminUser from "./pages/AdminUser/AdminUser";
 import { Cart } from "./layout/Cart/Cart";
+import { ProductDetail } from "./pages/ProductDetail/ProductDetail";
 
 function App() {
 	return (
@@ -25,7 +26,7 @@ function App() {
 					<Route path="/about-us" element={<AboutUs />} />
 
 					<Route path="/login" element={<Login />} />
-
+					<Route path="/product-detail/:id" element={<ProductDetail />} />
 					<Route path="/register" element={<Register />} />
 
 					{/* Rutas protegidas con el Guard AdminRoute */}
