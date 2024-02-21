@@ -11,6 +11,7 @@ export const OrderProvider = ({ children }) => {
 	const [totalItems, setTotalItems] = useState(0);
 
 	useEffect(() => {
+		// -SHOW
 		calculateTotalItems();
 		calculateTotal();
 	}, [order]);

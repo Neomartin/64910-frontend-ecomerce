@@ -1,23 +1,11 @@
-import { NavLink, useNavigate } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import "./Header.css";
 import { useOrder } from "@/context/OrderContext";
-// import LINKS from '../../LINKS';
+import { useUser } from "@/context/UserContext";
 
 export default function Header() {
 	const { toggleMenu, totalItems } = useOrder();
-	const navigate = useNavigate();
-	const isAdmin = true;
-	const user = {
-		name: "John Doe",
-	};
-	const currentUser = JSON.parse(localStorage.getItem("currentUser"));
-
-	// const avaibleLinks = LINKS.filter(link => isAdmin || !link.admin)
-	function logout() {
-		localStorage.removeItem("currentUser");
-		localStorage.removeItem("token");
-		navigate("/");
-	}
+	const { user, logout, admin } = useUser();
 
 	return (
 		<header className="header">
@@ -39,17 +27,7 @@ export default function Header() {
 				Registro
 			</NavLink>
 
-			{currentUser ? (
-				<button className="nav-link" onClick={() => logout()}>
-					Logout
-				</button>
-			) : (
-				<NavLink to="/login" className="nav-link">
-					Login
-				</NavLink>
-			)}
-
-			{isAdmin && (
+			{admin && (
 				<>
 					<NavLink to="/admin-product" className="nav-link">
 						Admin Product
@@ -61,9 +39,8 @@ export default function Header() {
 			)}
 
 			<div className="user-info">
-				{user && (
+				{user ? (
 					<>
-						<div>{user.name}</div>
 						<div className="icon-container">
 							<i
 								data-count={totalItems}
@@ -71,7 +48,17 @@ export default function Header() {
 								onClick={() => toggleMenu()}
 							></i>
 						</div>
+						<div>{user.name}</div>
+						<i
+							data-count={totalItems}
+							className="pointer fa-solid fa-arrow-right-from-bracket"
+							onClick={() => logout()}
+						></i>
 					</>
+				) : (
+					<NavLink to="/login" className="nav-link">
+						Login
+					</NavLink>
 				)}
 			</div>
 			{/* {
