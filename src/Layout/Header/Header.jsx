@@ -5,7 +5,7 @@ import { useUser } from "@/context/UserContext";
 
 const URL = import.meta.env.VITE_SERVER_URL;
 
-export default function Header() {
+const Header = () => {
 	const { toggleMenu, totalItems } = useOrder();
 	const { user, logout, admin } = useUser();
 
@@ -87,3 +87,5 @@ export default function Header() {
 		</header>
 	);
 }
+
+export default Header;
