@@ -10,7 +10,7 @@ export default function Header() {
 	const { user, logout, admin } = useUser();
 
 	return (
-		<header className="header">
+	<header className="header">
 			<nav className="nav-list">
 				<NavLink
 					to="/"
@@ -27,10 +27,14 @@ export default function Header() {
 					Acerca de
 				</NavLink>
 
-				{!user && (
-					<NavLink to="/register" className="nav-link">
-						Registro
-					</NavLink>
+				{user ? <NavLink to="/orders" className="nav-link">
+							Ordenes
+						</NavLink> : (
+					<>
+						<NavLink to="/register" className="nav-link">
+							Registro
+						</NavLink>
+					</>
 				)}
 
 				{admin && (
@@ -55,19 +59,24 @@ export default function Header() {
 					<>
 						<div className="icon-container">
 							<i
-								data-count={totalItems}
+								data-count={ totalItems }
 								className="cart-icon fa-solid fa-cart-shopping"
 								onClick={() => toggleMenu()}
 							></i>
 						</div>
-						<span className="user-avatar">
+						<div className="dropdown-menu user-avatar">
 							<img src={`${URL}/images/users/${user.image}`} alt={user.name} />
-						</span>
-						<i
-							data-count={totalItems}
-							className="pointer fa-solid fa-arrow-right-from-bracket"
-							onClick={() => logout()}
-						></i>
+							<div className="dropdown-links">
+								<NavLink to="/orders" className="nav-link">
+									<i className="fa-solid fa-dolly"></i>
+									Ordenes
+								</NavLink>
+								<a className="nav-link" onClick={() => logout()}>
+									<i className="pointer fa-solid fa-arrow-right-from-bracket"></i>{" "}
+									Logout
+								</a>
+							</div>
+						</div>
 					</>
 				) : (
 					<NavLink to="/login" className="nav-link">

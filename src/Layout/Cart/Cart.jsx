@@ -3,8 +3,7 @@ import { useOrder } from "../../context/OrderContext";
 
 const URL = import.meta.env.VITE_SERVER_URL;
 export const Cart = () => {
-	const { order, cartMenu, total, totalItems, finishOrder, clearCart } =
-		useOrder();
+	const { order, cartMenu, total, totalItems, finishOrder, clearCart } = useOrder();
 	console.log(`Order`, order);
 	return (
 		<div className={`cart-wrapper ${cartMenu ? "active" : ""}`}>
@@ -19,7 +18,9 @@ export const Cart = () => {
 									src={`${URL}/images/users/${prod.image}`}
 									alt={prod.productName}
 								/>
+
 								{prod.productName}
+								
 								<div className="order-quantity">
 									{prod.quantity}
 									<div className="order-delete-item">

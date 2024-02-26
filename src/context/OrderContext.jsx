@@ -3,16 +3,18 @@ import { useUser } from "./UserContext";
 import Swal from "sweetalert2";
 import axios from "axios";
 
+const URL = import.meta.env.VITE_SERVER_URL;
+
 const OrderContext = createContext();
 
 export const useOrder = () => useContext(OrderContext);
 
 export const OrderProvider = ({ children }) => {
 	const { user } = useUser();
+
 	// -SHOW
-	const [order, setOrder] = useState(
-		() => JSON.parse(localStorage.getItem("order")) || [],
-	);
+	const [order, setOrder] = useState(() => JSON.parse(localStorage.getItem("order")) || []);
+
 	const [cartMenu, setCartMenu] = useState(false);
 	const [total, setTotal] = useState(0);
 	const [totalItems, setTotalItems] = useState(0);
@@ -21,23 +23,22 @@ export const OrderProvider = ({ children }) => {
 		// -SHOW
 		calculateTotalItems();
 		calculateTotal();
+
 	}, [order]);
+
+
 	// addItem
 	function addItem(item) {
-		console.log(item);
+		// console.log(item);
 
-		// -SHOW
-		if (!user)
-			return Swal.fire({
-				icon: "error",
-				title: "Oops...",
-				text: "Debes iniciar sesión para agregar productos al carrito",
-			});
+		// // -SHOW
+
 		const itemIndex = order.findIndex((prod) => prod.productId === item._id);
 		let newOrder;
 		// añadir un elemento a mi order
 		if (itemIndex >= 0) {
 			newOrder = order.map((producto) => {
+				// Devuelvo un nuevo array, solo que checkeo si el item que me enviaron como se que ya existia en mi carrito, si es asi, le sumo 1 a la cantidad
 				if (producto.productId === item._id) {
 					return { ...producto, quantity: producto.quantity + 1 };
 				}
@@ -57,66 +58,77 @@ export const OrderProvider = ({ children }) => {
 
 		localStorage.setItem("order", JSON.stringify(newOrder));
 		setOrder(newOrder);
+
 	}
 
 	function calculateTotalItems() {
-		const totales = order.reduce((total, producto) => {
-			total += producto.quantity;
-			return total;
-		}, 0);
 
-		setTotalItems(totales);
+		// const totales = order.reduce((total, producto) => {
+		// 	total += producto.quantity;
+		// 	return total;
+		// }, 0);
+
+		let totalItems = 0;
+		order.forEach(prod => {
+			totalItems += prod.quantity
+		})
+
+		setTotalItems(totalItems);
 	}
 
 	function calculateTotal() {
-		const totalAcc = order.reduce((acc, producto) => {
-			console.log(producto);
-			// -SHOW
-			acc += producto.price * producto.quantity;
-			return acc;
-		}, 0);
+		// const totalAcc = order.reduce((acc, producto) => {
+		// 	console.log(producto);
+		// 	// -SHOW
+		// 	acc += producto.price * producto.quantity;
+		// 	return acc;
+		// }, 0);
+		let total = 0;
 
-		setTotal(totalAcc);
+		order.forEach(prod => {
+			total += prod.price * prod.quantity
+		})
+
+		setTotal(total);
 	}
 
 	async function finishOrder() {
-		if (!user)
-			return Swal.fire({
-				icon: "error",
-				title: "Oops...",
-				text: "Debes iniciar sesión para finalizar la compra",
-			});
+		try {
+			
+			if(!user) return Swal.fire('Debe loguearse', 'Para finalizar la orden debe estar logueado', 'error');
 
-		const { _id: userId } = user;
-		const products = order.map((prod) => {
-			return {
-				productId: prod.productId,
-				quantity: prod.quantity,
-				price: prod.price,
-			};
-		});
+			const newOrder = {
+				userId: user._id,
+				total: total,
+				products: order
+			}
 
-		const newOrder = {
-			userId,
-			products,
-			total,
-		};
+			const response = await axios.post(`${URL}/orders`, newOrder);
 
-		const response = await axios.post(`${URL}/orders`, newOrder);
+			console.log(response.data);
 
-		if (response.status === 201) {
 			Swal.fire({
 				icon: "success",
-				title: "Compra realizada",
-				text: "Gracias por tu compra",
-			});
+				title: "Compra realizada!",
+				text: "Gracias por su compra!",
+			})
+
 			clearCart();
+
+		} catch (error) {
+			console.log(error)
+			Swal.fire({
+				icon: "error",
+				title: "Oops...",
+				text: "Algo salió mal!",
+			})
 		}
 	}
 
 	// removeItem
 	function removeItem(id) {
 		// Debo buscar en el array order ese item y eliminarlo y actualizar el estado de orders
+
 	}
 
 	// clearCart
@@ -136,14 +148,14 @@ export const OrderProvider = ({ children }) => {
 		<OrderContext.Provider
 			value={{
 				order,
-				cartMenu,
+				cartMenu,  // true o false para mostrar el carrito
 				total,
 				addItem,
 				removeItem,
 				clearCart,
 				toggleMenu,
 				totalItems,
-				finishOrder,
+				finishOrder
 			}}
 		>
 			{children}

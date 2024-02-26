@@ -1,11 +1,56 @@
+import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
+import Swal from "sweetalert2";
+import axios from "axios";
+const URL = import.meta.env.VITE_SERVER_URL;
 
 export default function AdminProduct() {
 	const { register, handleSubmit } = useForm();
+	const [ categories, setCategories ] = useState([]);
 
-	function submitedData(data) {
-		console.log(data);
-		// TODO: enviar estos datos al backend como body de la request POST, llamar el endpoint POST /products
+	useEffect(() => {
+		getCategories();
+	}, [])
+
+	async function getCategories() {
+		try {
+			const response = await axios.get(`${URL}/product/categories`);
+			const { categories } = response.data;
+
+			setCategories(categories);
+
+		} catch (error) {
+			console.log(error);
+			Swal.fire('Error', 'Ocurrio un error al obtener las categorias', 'error');
+		}
+	}
+
+	async function submitedData(data) {
+		try {
+			// TODO: enviar estos datos al backend como body de la request POST, llamar el endpoint POST /products
+			const formData = new FormData();
+			Object.keys(data).forEach(key => {
+				if(key === 'image') {
+					formData.append(key, data[key][0]);
+					return;
+				}
+				formData.append(key, data[key]);
+			});
+
+			formData.forEach((value, key) => console.log(key, value));
+
+			await axios.post(`${URL}/products`, formData, {
+				headers: {
+					'Authorization': localStorage.getItem('token')
+
+				}
+			});
+
+			Swal.fire('Producto creado', 'El producto fue creado con exito', 'success');
+		} catch (error) {
+			console.log(error);
+			Swal.fire('Error', 'Ocurrio un error al crear el producto', 'error');
+		}
 	}
 
 	return (
@@ -41,8 +86,8 @@ export default function AdminProduct() {
 						></textarea>
 					</div>
 					<div className="input-group">
-						<label htmlFor="">Imagen</label>
-						<input type="url" className="admin-input" {...register("image")} />
+						<label htmlFor="image">Imagen</label>
+						<input type="file" id="image" className="admin-input" {...register("image")} />
 					</div>
 					<div className="input-group">
 						<label htmlFor=""></label>
@@ -56,11 +101,15 @@ export default function AdminProduct() {
 						Activo
 					</div>
 					<div className="input-group">
-						<select className="admin-input" {...register("category")}>
-							<option value="consoles_sony">Consolas Playstation</option>
-							<option value="consoles_microsoft">Consolas XBOX</option>
-							<option value="pc">Computadoras</option>
-							<option value="accesories">Accesorios</option>
+						<select defaultValue="default" disabled={!categories.length} className="admin-input" {...register("category")}>
+								<option value="default" disabled>
+									Seleccione una categoria
+								</option>
+							{categories.map((category) => (
+								<option key={category._id} value={category._id}>
+									{category.name}
+								</option>))
+							}
 						</select>
 					</div>
 					<div className="input-group">

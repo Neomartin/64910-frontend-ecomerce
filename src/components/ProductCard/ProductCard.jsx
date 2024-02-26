@@ -24,6 +24,9 @@ export const ProductCard = ({ product }) => {
 			<div className="card-body">
 				<small>{product.location}</small>
 				<h2>{product.name}</h2>
+				{/* <div className="clamp">
+					Lorem ipsum dolor sit amet consectetur adipisicing elit. Id incidunt at nihil molestias quis modi quidem, voluptatum atque eveniet distinctio quod, cumque hic tempore. Quaerat suscipit sint nobis recusandae, eius quod id, repellendus quos dolores tempore quae facilis similique pariatur.
+				</div> */}
 				<p className="product-price">${product.age}</p>
 				<p className="product-date">{product.email}</p>
 			</div>
