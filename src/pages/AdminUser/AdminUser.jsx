@@ -6,7 +6,7 @@ import RegisterForm from "@/components/RegisterForm/RegisterForm";
 import './AdminUser.css';
 
 const URL = import.meta.env.VITE_SERVER_URL;
-
+const TOKEN = localStorage.getItem("token");
 const AdminUser = () => {
 	
 	const [dbUsers, setDbUsers] = useState([]);

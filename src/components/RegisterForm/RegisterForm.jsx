@@ -61,6 +61,7 @@ const RegisterForm = ({ getUsers, formValue, userId, setUserId }) => {
 					getUsers()
 					setUserId(null);
 				};
+				reset();
 				// Hago un return para que mi código que sigue luego del if no se ejecute
 				return;
 			}
