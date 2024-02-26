@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import Swal from "sweetalert2";
 import axios from "axios";
-import { UserTable } from "../../components/UserTable/UserTable";
+import { UserTable } from "../../UserTable/UserTable";
 import RegisterForm from "@/components/RegisterForm/RegisterForm";
 import './AdminUser.css';
 

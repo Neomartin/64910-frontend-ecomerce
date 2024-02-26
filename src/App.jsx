@@ -1,18 +1,18 @@
 import "./App.css";
 import { Routes, Route } from "react-router-dom";
 
-import Home from "./pages/Home/Home";
-import Contact from "./pages/Contact/Contact";
-import Register from "./pages/Register/Register";
-import AboutUs from "./pages/AboutUs/AboutUs";
-import Login from "./pages/Login/Login";
+import Home from "./components/pages/Home/Home";
+import Contact from "./components/pages/Contact/Contact";
+import Register from "./components/pages/Register/Register";
+import AboutUs from "./components/pages/AboutUs/AboutUs";
+import Login from "./components/pages/Login/Login";
 import Footer from "./components/layout/Footer/Footer";
-import AdminProduct from "./pages/AdminProduct/AdminProduct";
-import AdminRoute from "./guard/AdminRoute/AdminRoute";
-import AdminUser from "./pages/AdminUser/AdminUser";
+import AdminProduct from "./components/pages/AdminProduct/AdminProduct";
+import AdminRoute from "./services/guard/AdminRoute/AdminRoute";
+import AdminUser from "./components/pages/AdminUser/AdminUser";
 import { Cart } from "./components/layout/Cart/Cart";
-import { ProductDetail } from "./pages/ProductDetail/ProductDetail";
-import { Order } from "./pages/Order/Order";
+import { ProductDetail } from "./components/pages/ProductDetail/ProductDetail";
+import { Order } from "./components/pages/Order/Order";
 import Header from "./components/layout/Header/Header";
 
 function App() {
