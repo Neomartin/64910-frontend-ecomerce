@@ -6,14 +6,14 @@ import Contact from "./pages/Contact/Contact";
 import Register from "./pages/Register/Register";
 import AboutUs from "./pages/AboutUs/AboutUs";
 import Login from "./pages/Login/Login";
-import Footer from "./layout/Footer/Footer";
+import Footer from "./components/layout/Footer/Footer";
 import AdminProduct from "./pages/AdminProduct/AdminProduct";
 import AdminRoute from "./guard/AdminRoute/AdminRoute";
 import AdminUser from "./pages/AdminUser/AdminUser";
-import { Cart } from "./layout/Cart/Cart";
+import { Cart } from "./components/layout/Cart/Cart";
 import { ProductDetail } from "./pages/ProductDetail/ProductDetail";
 import { Order } from "./pages/Order/Order";
-import Header from "./layout/Header/Header";
+import Header from "./components/layout/Header/Header";
 
 function App() {
 	return (

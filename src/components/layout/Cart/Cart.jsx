@@ -1,5 +1,5 @@
 import "./Cart.css";
-import { useOrder } from "../../context/OrderContext";
+import { useOrder } from "../../../context/OrderContext";
 
 const URL = import.meta.env.VITE_SERVER_URL;
 export const Cart = () => {
